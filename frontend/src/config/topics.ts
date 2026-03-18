@@ -1,0 +1,18 @@
+export const TOPICS = [
+  { id: 'javascript',      label: 'JavaScript',     icon: 'JS' },
+  { id: 'typescript',      label: 'TypeScript',      icon: 'TS' },
+  { id: 'python',          label: 'Python',          icon: 'PY' },
+  { id: 'go',              label: 'Go',              icon: 'GO' },
+  { id: 'rust',            label: 'Rust',            icon: 'RS' },
+  { id: 'java',            label: 'Java',            icon: 'JV' },
+  { id: 'csharp',          label: 'C#',              icon: 'C#' },
+  { id: 'cpp',             label: 'C++',             icon: 'C+' },
+  { id: 'php',             label: 'PHP',             icon: 'PH' },
+  { id: 'symfony',        label: 'Symfony',         icon: 'SF' },
+  { id: 'laravel',        label: 'Laravel',         icon: 'LV' },
+  { id: 'wordpress',      label: 'WordPress',       icon: 'WP' },
+  { id: 'sql',             label: 'SQL',             icon: 'SQ' },
+  { id: 'system_design',   label: 'System Design',   icon: 'SD' },
+  { id: 'data_structures', label: 'Data Structures', icon: 'DS' },
+  { id: 'algorithms',      label: 'Algorithms',      icon: 'AL' },
+];
