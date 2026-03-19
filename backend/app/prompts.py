@@ -77,4 +77,4 @@ CHALLENGE:
 
 KEY CONCEPTS: {key_concepts}
 
-Respond ONLY in JSON: {{ "answer": "Full structured answer covering all key concepts." }}"""
+Respond in plain text. Use markdown for structure (headings, code blocks, bullet points). Cover all key concepts."""

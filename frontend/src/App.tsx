@@ -54,7 +54,7 @@ export default function App() {
         {(phase === 'challenge' || phase === 'evaluating') && challenge && (
           <div className="challenge-panel">
             <ChallengeView challenge={challenge} />
-            <AnswerInput onSubmit={evaluate} disabled={phase === 'evaluating'} />
+            <AnswerInput onSubmit={evaluate} disabled={phase === 'evaluating'} challengeType={challenge.type} topic={customTopic.trim() || topic} />
             {phase === 'evaluating' && (
               <div className="spinner-wrap">
                 <div className="spinner" />

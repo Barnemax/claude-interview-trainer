@@ -7,7 +7,7 @@ from app.prompts import (
     build_full_answer_prompt,
     build_hint_prompt,
 )
-from app.services.claude_client import call_claude
+from app.services.claude_client import call_claude, call_claude_text
 
 router = APIRouter()
 
@@ -33,4 +33,4 @@ async def get_hint(req: HintRequest):
 @router.post("/answer")
 async def get_full_answer(req: FullAnswerRequest):
     prompt = build_full_answer_prompt(req.challenge)
-    return call_claude(prompt)
+    return {"answer": call_claude_text(prompt)}
