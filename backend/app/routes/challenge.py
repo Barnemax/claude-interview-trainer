@@ -1,20 +1,27 @@
 from fastapi import APIRouter
 
-from app.models.requests import ChallengeRequest, EvalRequest, FullAnswerRequest, HintRequest
+from app.models.requests import ChallengeRequest, EvalRequest, FullAnswerRequest, HintRequest, JobDescriptionRequest
 from app.prompts import (
     build_challenge_prompt,
     build_eval_prompt,
     build_full_answer_prompt,
     build_hint_prompt,
+    build_jd_analysis_prompt,
 )
 from app.services.claude_client import call_claude, call_claude_text
 
 router = APIRouter()
 
 
+@router.post("/analyze-jd")
+async def analyze_job_description(req: JobDescriptionRequest):
+    prompt = build_jd_analysis_prompt(req.text)
+    return call_claude(prompt)
+
+
 @router.post("/challenge")
 async def generate_challenge(req: ChallengeRequest):
-    prompt = build_challenge_prompt(req.topic, req.level, req.challenge_type)
+    prompt = build_challenge_prompt(req.topic, req.level, req.challenge_type, req.job_context)
     return call_claude(prompt)
 
 

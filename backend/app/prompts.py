@@ -10,9 +10,10 @@ RULES:
 - Keep challenges focused — one concept per question"""
 
 
-def build_challenge_prompt(topic: str, level: str, challenge_type: str) -> str:
+def build_challenge_prompt(topic: str, level: str, challenge_type: str, job_context: str | None = None) -> str:
+    context_block = f"\nJob context: {job_context}" if job_context else ""
     return f"""Generate a {level}-level technical interview challenge about {topic}.
-Challenge type: {challenge_type}
+Challenge type: {challenge_type}{context_block}
 
 Respond ONLY in this JSON format, no markdown fences:
 {{
@@ -22,6 +23,28 @@ Respond ONLY in this JSON format, no markdown fences:
   "key_concepts": ["concept1", "concept2", "concept3", "concept4", "concept5"],
   "difficulty_note": "What makes this {level}-level"
 }}"""
+
+
+def build_jd_analysis_prompt(text: str) -> str:
+    return f"""Analyze this job description and extract structured information.
+
+JOB DESCRIPTION:
+{text}
+
+Respond ONLY in this JSON format, no markdown fences:
+{{
+  "tech_stack": ["list of specific technologies, languages, frameworks mentioned"],
+  "seniority": "junior|mid|senior",
+  "domain": "e.g. fintech, e-commerce, SaaS, healthcare, etc.",
+  "key_themes": ["3-5 recurring themes, e.g. real-time data, distributed systems, API design"],
+  "interview_tips": ["4-6 specific things the candidate should expect or prepare for based on this JD"]
+}}
+
+Rules:
+- tech_stack: only concrete technologies (React, PostgreSQL, Kubernetes) — not vague terms like "modern frameworks"
+- seniority: infer from years of experience required, responsibilities, and language used
+- interview_tips: be specific and actionable, e.g. "Likely to ask about React state management patterns given the emphasis on complex UI" not "Study frontend"
+- If the JD is too vague to extract something reliably, use an empty array"""
 
 
 def build_eval_prompt(challenge: 'ChallengeModel', answer: str) -> str:

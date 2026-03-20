@@ -15,6 +15,19 @@ class ChallengeRequest(BaseModel):
     topic: str
     level: str
     challenge_type: str
+    job_context: str | None = None
+
+
+class JobDescriptionRequest(BaseModel):
+    text: str
+
+
+class JobProfile(BaseModel):
+    tech_stack: list[str]
+    seniority: str
+    domain: str
+    key_themes: list[str]
+    interview_tips: list[str]
 
 
 class EvalRequest(BaseModel):

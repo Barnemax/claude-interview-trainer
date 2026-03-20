@@ -183,6 +183,39 @@ body {
 /* Error */
 .error-banner { background: #2a0a0a; border: 1px solid #4a1010; border-radius: var(--radius); padding: 0.75rem 1rem; color: var(--red); font-size: 0.9rem; }
 
+/* Mode toggle */
+.mode-toggle { display: flex; background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 3px; gap: 3px; }
+.mode-btn { flex: 1; padding: 0.4rem 0.75rem; background: none; border: none; border-radius: calc(var(--radius) - 2px); color: var(--text-muted); font-size: 0.875rem; font-weight: 500; cursor: pointer; transition: all 0.15s; }
+.mode-btn:hover { color: var(--text); }
+.mode-btn--active { background: var(--surface-2); color: var(--text); border: 1px solid var(--border); }
+
+/* Job description input */
+.jd-input { display: flex; flex-direction: column; gap: 0.75rem; }
+.jd-textarea {
+  width: 100%; padding: 0.75rem 1rem;
+  background: var(--surface); border: 1px solid var(--border);
+  border-radius: var(--radius); color: var(--text);
+  font-family: inherit; font-size: 0.875rem; line-height: 1.6;
+  resize: vertical; transition: border-color 0.15s;
+  min-height: 180px;
+}
+.jd-textarea:focus { outline: none; border-color: var(--accent); }
+.jd-textarea:disabled { opacity: 0.5; }
+.jd-textarea::placeholder { color: var(--text-muted); }
+
+/* Job profile card */
+.jd-profile { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); padding: 1.25rem; display: flex; flex-direction: column; gap: 1rem; }
+.jd-profile-header { display: flex; align-items: center; justify-content: space-between; }
+.jd-profile-meta { display: flex; align-items: center; gap: 0.5rem; }
+.jd-seniority { font-size: 0.8rem; font-weight: 600; padding: 0.2rem 0.6rem; background: #1e1f3a; border: 1px solid var(--accent); border-radius: 999px; color: var(--accent-hover); }
+.jd-domain { font-size: 0.8rem; color: var(--text-muted); }
+.jd-section { display: flex; flex-direction: column; gap: 0.5rem; }
+.jd-section-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); }
+.jd-tech-pill { display: inline-flex; padding: 0.25rem 0.6rem; background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); font-size: 0.8rem; color: var(--text); font-family: var(--font-mono); }
+.jd-theme-pill { display: inline-flex; padding: 0.25rem 0.6rem; background: var(--surface-2); border: 1px solid var(--border); border-radius: var(--radius); font-size: 0.8rem; color: var(--text-muted); }
+.jd-tips { padding-left: 1.25rem; display: flex; flex-direction: column; gap: 0.4rem; }
+.jd-tip { font-size: 0.875rem; color: var(--text); line-height: 1.5; }
+
 /* Full answer loader */
 .full-answer-loading { display: flex; align-items: center; gap: 0.75rem; color: var(--text-muted); font-size: 0.9rem; padding: 0.5rem 0; }
 .full-answer-loading .spinner { width: 18px; height: 18px; border-width: 2px; flex-shrink: 0; }

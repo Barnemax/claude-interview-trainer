@@ -24,3 +24,11 @@ export interface Stats {
   needs_work: number;
   off_track: number;
 }
+
+export interface JobProfile {
+  tech_stack: string[];
+  seniority: 'junior' | 'mid' | 'senior';
+  domain: string;
+  key_themes: string[];
+  interview_tips: string[];
+}

@@ -4,6 +4,7 @@ from app.prompts import (
     build_eval_prompt,
     build_full_answer_prompt,
     build_hint_prompt,
+    build_jd_analysis_prompt,
 )
 
 
@@ -28,6 +29,19 @@ class TestBuildChallengePrompt:
         prompt = build_challenge_prompt("go", "mid", "concept")
         for key in ("title", "type", "body", "key_concepts", "difficulty_note"):
             assert key in prompt
+
+    def test_includes_job_context_when_provided(self):
+        prompt = build_challenge_prompt("react", "senior", "concept", "senior-level fintech role. Tech stack: React, TypeScript.")
+        assert "senior-level fintech role" in prompt
+        assert "React, TypeScript" in prompt
+
+    def test_no_job_context_block_when_none(self):
+        prompt = build_challenge_prompt("python", "mid", "output", None)
+        assert "Job context" not in prompt
+
+    def test_no_job_context_block_when_omitted(self):
+        prompt = build_challenge_prompt("python", "mid", "output")
+        assert "Job context" not in prompt
 
 
 class TestBuildEvalPrompt:
@@ -70,6 +84,34 @@ class TestBuildHintPrompt:
         challenge = make_challenge()
         prompt = build_hint_prompt(challenge, 1, [])
         assert "PREVIOUS HINTS" not in prompt
+
+
+class TestBuildJdAnalysisPrompt:
+    def test_includes_job_description_text(self):
+        prompt = build_jd_analysis_prompt("We need a React developer with 5+ years experience.")
+        assert "We need a React developer with 5+ years experience." in prompt
+
+    def test_instructs_json_only_response(self):
+        prompt = build_jd_analysis_prompt("Some JD text")
+        assert "JSON" in prompt
+        assert "no markdown fences" in prompt
+
+    def test_includes_all_required_json_keys(self):
+        prompt = build_jd_analysis_prompt("Some JD text")
+        for key in ("tech_stack", "seniority", "domain", "key_themes", "interview_tips"):
+            assert key in prompt
+
+    def test_includes_seniority_options(self):
+        prompt = build_jd_analysis_prompt("Some JD text")
+        assert "junior|mid|senior" in prompt
+
+    def test_instructs_concrete_technologies_only(self):
+        prompt = build_jd_analysis_prompt("Some JD text")
+        assert "concrete technologies" in prompt
+
+    def test_instructs_specific_actionable_tips(self):
+        prompt = build_jd_analysis_prompt("Some JD text")
+        assert "specific and actionable" in prompt
 
 
 class TestBuildFullAnswerPrompt:

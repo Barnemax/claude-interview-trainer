@@ -18,11 +18,11 @@ export function useChallenge() {
 
   const { stats, recordResult, clearStats } = useSession();
 
-  const generate = async (topic: string, level: string, type: string) => {
+  const generate = async (topic: string, level: string, type: string, jobContext?: string) => {
     setPhase('loading');
     setError(null);
     try {
-      const result = await generateChallenge(topic, level, type);
+      const result = await generateChallenge(topic, level, type, jobContext);
       setChallenge(result);
       setEvaluation(null);
       setHints([]);

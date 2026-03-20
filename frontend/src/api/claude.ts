@@ -1,4 +1,4 @@
-import type { Challenge, Evaluation } from '../types';
+import type { Challenge, Evaluation, JobProfile } from '../types';
 
 const BASE = '/api';
 
@@ -20,8 +20,11 @@ async function post<T>(path: string, body: unknown): Promise<T> {
   return res.json() as Promise<T>;
 }
 
-export const generateChallenge = (topic: string, level: string, challenge_type: string) =>
-  post<Challenge>('/challenge', { topic, level, challenge_type });
+export const analyzeJobDescription = (text: string) =>
+  post<JobProfile>('/analyze-jd', { text });
+
+export const generateChallenge = (topic: string, level: string, challenge_type: string, job_context?: string) =>
+  post<Challenge>('/challenge', { topic, level, challenge_type, job_context });
 
 export const evaluateAnswer = (challenge: Challenge, answer: string) =>
   post<Evaluation>('/evaluate', { challenge, answer });
